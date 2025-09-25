@@ -11,7 +11,7 @@ namespace LibraryBookManagmentSystem.classes
         public string Name { get; set; }
         public int MemberId  { get; set; }
         public static Book BorrowBook(Book book) {
-            Book borrowedBook= new Book().Borrow(book);
+            Book borrowedBook= Book.Borrow(book);
             return book;
         
         

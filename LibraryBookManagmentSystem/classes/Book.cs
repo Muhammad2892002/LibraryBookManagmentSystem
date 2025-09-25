@@ -12,7 +12,7 @@ namespace LibraryBookManagmentSystem.classes
         public string Author { get; set; }
         public string ISBN { get; set; }
         public bool? IsBorrowed { get; set; }
- public Book Borrow(Book book) {
+ public static Book Borrow(Book book) {
             if (book.IsBorrowed == false)
             {
                 book.IsBorrowed = true;

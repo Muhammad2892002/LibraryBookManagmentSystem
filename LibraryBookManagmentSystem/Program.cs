@@ -73,7 +73,8 @@ namespace LibraryBookManagmentSystem
             int memberAsInt;
             bool isParsed= int.TryParse(memberIdAsString, out memberAsInt);
             var memberExist = allMembers.FirstOrDefault(memeber => memeber.MemberId == memberAsInt && memeber.Name == name);
-            if (memberExist != null) {
+            if (memberExist != null)
+            {
             choise:
                 Console.WriteLine($"Welcome MR/MS. {memberExist.Name} ");
 
@@ -82,8 +83,10 @@ namespace LibraryBookManagmentSystem
                 Console.WriteLine("1. Borrow a book or \n 2.Return a book");
                 string userChoice = Console.ReadLine();
 
-                switch (userChoice) {
-                    case "1": {
+                switch (userChoice)
+                {
+                    case "1":
+                        {
                             Console.WriteLine("Here is the list of available books :");
                             Library.ShowAvailableBooks();
                             Console.WriteLine("Enter the ISBN of  book that you want to borrow");
@@ -96,36 +99,51 @@ namespace LibraryBookManagmentSystem
 
 
                             }
-                            else
+                            else if (returnedBook != null && returnedBook.IsBorrowed == true)
                             {
-                                Console.WriteLine("This book does not exist in our library or it is bowred ");
+                                Console.WriteLine("This book  is bowred ");
                                 goto choise;
 
 
 
                             }
-                           
+                            else if (returnedBook == null) {
+                                Console.WriteLine("This book does not exist ");
+                                goto choise;
 
-                            break;
+
+                            }
+
+
+                                break;
 
                         }
-                    case "2": {
+                    case "2":
+                        {
                             Console.WriteLine("Please enter the ISBN of the book ?");
-                                string isbnBookToReturn = Console.ReadLine(); 
-                            var returnedBook= Library.FindBookByISBN(isbnBookToReturn);
-                            if (returnedBook != null && returnedBook.IsBorrowed==true) {
+                            string isbnBookToReturn = Console.ReadLine();
+                            var returnedBook = Library.FindBookByISBN(isbnBookToReturn);
+                            if (returnedBook != null && returnedBook.IsBorrowed == true)
+                            {
                                 Library.ChangeBookStatus(returnedBook);
                                 goto choise;
 
 
                             }
-                            else {
-                                Console.WriteLine("This book does not exist in our library or it is not bowred yet");
+                            else if (returnedBook != null && returnedBook.IsBorrowed == false)
+                            {
+                                Console.WriteLine("This book is not bowrred !!");
                                 goto choise;
-                               
-                              
 
-                            } break;
+
+
+                            }
+                            else {
+                                Console.WriteLine("!No book!");
+                                goto choise;
+
+                            }
+                                break;
 
 
 
@@ -136,11 +154,17 @@ namespace LibraryBookManagmentSystem
                             goto choise;
                             break;
                         }
-                  
-                
-                }
-                
 
+
+                }
+
+
+
+
+            }
+            else {
+                Console.WriteLine("Member not found. Please check your name and member ID.");
+                Intilaizer();
 
 
             }
